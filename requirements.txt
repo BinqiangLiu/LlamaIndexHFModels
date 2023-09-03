@@ -9,5 +9,5 @@ streamlit
 streamlit_chat
 #torch
 llama_index
-tiktoken
+tiktoken==0.4.0
 pypdf
