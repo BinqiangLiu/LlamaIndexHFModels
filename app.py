@@ -45,7 +45,7 @@ query_engine = loadedindex.as_query_engine()
 
 while True:
     try:
-        question = st.text_input("Your question(Enter exit to quit):\n")        
+        question = st.text_input("Your question(Enter exit to quit):")        
         if question!="":
             initial_response = query_engine.query(question)
             temp_ai_response=str(initial_response)
