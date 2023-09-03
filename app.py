@@ -54,7 +54,7 @@ query_engine = loadedindex.as_query_engine()
 
 while True:
     try:
-        question = st.text_input("Your question(Enter exit to quit):")
+        question = st.text_input("Enter your query here:")
         print("Your query:\n"+question)
         if question.strip().isspace():
             st.write("Query Empty. Please enter valid query first.")
