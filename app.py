@@ -54,6 +54,8 @@ while True:
             st.write("AI Response:\n"+final_ai_response)
         elif question=="exit":
             break
+        elif question=="":
+            st.write("Query empty. Please enter your query first.")
     except Exception as e:
         st.stop()
    
