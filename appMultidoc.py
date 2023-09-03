@@ -44,7 +44,11 @@ with st.sidebar:
                 f.write(pdf_file.read())
             st.success(f"File '{pdf_file.name}' saved successfully.")
 
-documents = SimpleDirectoryReader(directory_path).load_data()
+try:
+    documents = SimpleDirectoryReader(directory_path).load_data()
+except Exception as e:
+    print("waiting for path creation.")
+
 
 # Load documents from a directory
 #documents = SimpleDirectoryReader('data').load_data()
