@@ -10,3 +10,4 @@ streamlit_chat
 #torch
 llama_index
 tiktoken
+pypdf
