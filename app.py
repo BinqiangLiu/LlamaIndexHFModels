@@ -6,6 +6,7 @@ from llama_index import StorageContext, load_index_from_storage
 from llama_index import LLMPredictor
 #from transformers import HuggingFaceHub
 from langchain import HuggingFaceHub
+from streamlit.components.v1 import html
 from pathlib import Path
 from time import sleep
 import random
@@ -14,6 +15,14 @@ import string
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
+st.set_page_config(page_title="Open AI Chat Assistant", layout="wide")
+st.subheader("Open AI Chat Assistant: Life Enhancing with AI!")
+
+css_file = "main.css"
+with open(css_file) as f:
+    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
+    
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 # Load documents from a directory
