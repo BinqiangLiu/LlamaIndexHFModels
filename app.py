@@ -25,8 +25,27 @@ with open(css_file) as f:
     
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
+documents=[]
+
+def generate_random_string(length):
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(length))  
+random_string = generate_random_string(20)
+directory_path=random_string
+
+with st.sidebar:
+    st.subheader("Upload your Documents Here: ")
+    pdf_files = st.file_uploader("Choose your PDF Files and Press OK", type=['pdf'], accept_multiple_files=False)
+    if pdf_files is not None:
+        os.makedirs(directory_path)
+        file_path = os.path.join(directory_path, pdf_files.name)
+        with open(file_path, 'wb') as f:
+            f.write(pdf_files.read())
+        st.success('File uploaded & saved successfully.')
+        documents = SimpleDirectoryReader(directory_path).load_data()
+
 # Load documents from a directory
-documents = SimpleDirectoryReader('data').load_data()
+#documents = SimpleDirectoryReader('data').load_data()
 
 embed_model = LangchainEmbedding(HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2'))
 
@@ -34,19 +53,14 @@ llm_predictor = LLMPredictor(HuggingFaceHub(repo_id="HuggingFaceH4/starchat-beta
 
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, embed_model=embed_model)
 
-def generate_random_string(length):
-    letters = string.ascii_lowercase
-    return ''.join(random.choice(letters) for i in range(length))  
-random_string = generate_random_string(20)
-
 new_index = VectorStoreIndex.from_documents(
     documents,
     service_context=service_context,
 )
 
-new_index.storage_context.persist("random_string")
+new_index.storage_context.persist("directory_path")
 
-storage_context = StorageContext.from_defaults(persist_dir="random_string")
+storage_context = StorageContext.from_defaults(persist_dir="directory_path")
 
 loadedindex = load_index_from_storage(storage_context=storage_context, service_context=service_context)
 
