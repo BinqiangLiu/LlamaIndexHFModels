@@ -54,17 +54,27 @@ query_engine = loadedindex.as_query_engine()
 
 while True:
     try:
-        question = st.text_input("Enter your query here:")        
-        if question!="":
+        question = st.text_input("Your question(Enter exit to quit):")
+        print("Your query:\n"+question)
+        if question.strip().isspace():
+            st.write("Query Empty. Please enter valid query first.")
+            break
+        elif question == "":
+#            st.write("Query Empty. Please enter valid query first.")
+            break
+        elif question.strip() == "":
+            st.write("Query Empty. Please enter valid query first.")
+            break
+        elif question.isspace():
+            st.write("Query Empty. Please enter valid query first.")
+            break
+        elif question=="exit":
+            break
+        elif question!="":
             initial_response = query_engine.query(question)
             temp_ai_response=str(initial_response)
             final_ai_response=temp_ai_response.partition('<|end|>')[0] 
             print("AI Response:\n"+final_ai_response)
-            st.write("AI Response:\n"+final_ai_response)
-        elif question=="exit":
-            break
-        elif question.strip() == "":            
-            pass            
+            st.write("AI Response:\n\n"+final_ai_response)
     except Exception as e:
         st.stop()
-   
