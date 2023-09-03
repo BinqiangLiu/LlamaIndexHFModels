@@ -16,8 +16,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-st.set_page_config(page_title="Open AI Chat Assistant", layout="wide")
-st.subheader("Open AI Chat Assistant: Life Enhancing with AI!")
+st.set_page_config(page_title="Open AI Doc-Chat Assistant", layout="wide")
+st.subheader("Open AI Doc-Chat Assistant: Life Enhancing with AI!")
 
 css_file = "main.css"
 with open(css_file) as f:
@@ -54,7 +54,7 @@ query_engine = loadedindex.as_query_engine()
 
 while True:
     try:
-        question = st.text_input("Your question(Enter exit to quit):")        
+        question = st.text_input("Enter your query here:")        
         if question!="":
             initial_response = query_engine.query(question)
             temp_ai_response=str(initial_response)
