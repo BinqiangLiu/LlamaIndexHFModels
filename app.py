@@ -44,12 +44,16 @@ loadedindex = load_index_from_storage(storage_context=storage_context, service_c
 query_engine = loadedindex.as_query_engine()
 
 while True:
-    question = input("Your question(Enter exit to quit):\n")
-    if question=="exit":
-        break
-    initial_response = query_engine.query(question)
-    temp_ai_response=str(initial_response)
-    final_ai_response=temp_ai_response.partition('<|end|>')[0] 
-    print("AI Response"+final_ai_response)
-    st.write("AI Response"+final_ai_response)
+    try:
+        question = st.text_input("Your question(Enter exit to quit):\n")        
+        if question!="":
+            initial_response = query_engine.query(question)
+            temp_ai_response=str(initial_response)
+            final_ai_response=temp_ai_response.partition('<|end|>')[0] 
+            print("AI Response:\n"+final_ai_response)
+            st.write("AI Response:\n"+final_ai_response)
+        elif question=="exit":
+            break
+    except Exception as e:
+        st.stop()
    
