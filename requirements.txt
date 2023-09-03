@@ -7,5 +7,6 @@ Requests
 sentence_transformers
 streamlit
 streamlit_chat
-torch
+#torch
 llama_index
+tiktoken
