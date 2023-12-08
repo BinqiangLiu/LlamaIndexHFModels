@@ -1,13 +1,16 @@
 huggingface_hub
 langchain
 pandas
-PyPDF2
+#PyPDF2
+#PyPDF2[full]
+#this app relies on llama-index, and does not use PyPDF2 but pypdf
+
 python-dotenv
 Requests
 sentence_transformers
 streamlit
 streamlit_chat
 #torch
-llama_index
+llama-index==0.8.69
 tiktoken
 pypdf
